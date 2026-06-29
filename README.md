@@ -1,21 +1,20 @@
-# Expense Tracker
+##    Expense Tracker App
 
-A simple expense tracker built with HTML, CSS, and JavaScript.
-
-## Features
+## Features:
 
 - Add expenses
 - Delete expenses
+- Reset all expenses
 - Calculate total expenses
-- Reset all data
-- LocalStorage support
+- Local Storage support
+- Enter key support
 
-## Technologies Used
-
+## Technologies:
 - HTML
 - CSS
 - JavaScript
+- Local Storage
 
-## Author
+## AOTHUR :
 
-Razi Ansari
+- RAZIANSARI

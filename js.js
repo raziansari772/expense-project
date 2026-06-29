@@ -1,3 +1,9 @@
+//------------LOCAL STORAGE DATA----------;
+
+let  allexpense = JSON.parse(localStorage.getItem("expenses")) || [];
+
+ //--------DOM QUERYSELECTOR---------
+
 const title = document.querySelector("#title");
 const amount = document.querySelector("#amount");
 const btn = document.querySelector("#btn");
@@ -5,17 +11,18 @@ const total = document.querySelector("#total");
 const list = document.querySelector("#list");
 const reset = document.querySelector("#reset");
 
-let allexpense = [];
-let totalexpense = 0;
+//--------LOCAL STORAGE AND SAVE TOTAL---------
+
+let  totalexpense = JSON.parse(localStorage.getItem("Expenses")) || 0;
+total.textContent = totalexpense;
+
+//-------------ADD EXPENSE----------
 
 btn.addEventListener("click", function(){
      
-   const  titleexpense = title.value;
+   const  titleexpense = title.value.toUpperCase();
    const amountexpense = amount.value;
 
-
-   //console.log(titleexpense);
-   //console.log(amountexpense);
 
    if(titleexpense === "" ||amountexpense === ""){
       alert("!!ADD YOUR TASK !!");
@@ -28,15 +35,22 @@ btn.addEventListener("click", function(){
    }
    allexpense.push(food);
 
-  // console.log(allexpense);
+   localStorage.setItem("expenses", JSON.stringify(allexpense));
+
 
   totalexpense = totalexpense + food.amount;
   total.textContent = totalexpense;
+
+  localStorage.setItem("Expenses", JSON.stringify(totalexpense));
 
   title.value = "";
    amount.value = "";
 
    render();
+
+});
+
+ //----------RENDER EXPENSE LIST---------
 
   function render(){
 
@@ -44,7 +58,6 @@ btn.addEventListener("click", function(){
 
    allexpense.forEach(function(item, index){
 
-      //console.log(item);
 
       const li = document.createElement("li");
       li.textContent = 
@@ -57,27 +70,54 @@ btn.addEventListener("click", function(){
 
       totalexpense -= item.amount; 
 
+      localStorage.setItem("Expenses", JSON.stringify(totalexpense))
+
       allexpense.splice(index, 1)
+
+      localStorage.setItem("expenses", JSON.stringify(allexpense));
 
       total.textContent = totalexpense;
      
     render();
 
      })
-     reset.addEventListener("click", function(){
+
+     list.appendChild(li);
+     li.appendChild(delbtn);
+
+   })
+
+  };
+
+//----------RESET ALL EXPENSE-----------
+
+ reset.addEventListener("click", function(){
 
       allexpense = [];
       totalexpense = 0;
 
       total.textContent = "0";
 
+      localStorage.setItem("expenses", JSON.stringify(allexpense));
+      localStorage.setItem("Expenses", JSON.stringify(0));
+
       render();
 
      })
-     list.appendChild(li);
-     li.appendChild(delbtn);
-   });
 
-  };
+     //-----------ENTER KEY SUPPORT---------
 
+title.addEventListener("keypress", function(e){
+   if(e.key === "Enter"){
+      btn.click();
+   }
 });
+amount.addEventListener("keypress", function(e){
+   if(e.key === "Enter"){
+      btn.click();
+   };
+});
+
+render();
+
+

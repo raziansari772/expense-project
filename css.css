@@ -13,13 +13,17 @@ body{
    box-shadow: 0 0  20px;
 }
 input{
-    width: 370px;
+    width: 400px;
     margin-top: 6px;
     height: 30px;
     background-color: rgb(189, 188, 188);
     border-radius: 8px;
     text-align: center;
     font-weight: 900;
+}
+input:focus{
+    outline: none;
+    border: 2px solid rgb(253, 249, 249);
 }
 #btn{
     margin-top: 6px;
